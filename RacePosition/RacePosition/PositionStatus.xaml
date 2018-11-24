@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RacePosition.PositionStatus">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="racerList" RowHeight="215" VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" BackgroundColor="{Binding Background}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="#" Font="40"/>
+                                    <Label Text="{Binding CarNumber}" Font="40" FontAttributes="Bold" Margin="0,0,15,0"/>
+                                    <Label Text="{Binding Class}" Font="40" Margin="0,0,15,0"/>
+                                    <Label Text="P" Font="40" FontAttributes="Bold"/>
+                                    <Label Text="{Binding PositionInClass}" Font="40" FontAttributes="Bold" Margin="0,0,15,0"/>
+                                    <Label Text="Overall:" FontAttributes="Bold" Font="40" Margin="0,0,2,0"/>
+                                    <Label Text="{Binding PositionOverall}" Font="40" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Gap}" Font="40" Margin="0,0,15,0"/>
+                                    <Label Text="{Binding GainLoss}" Font="40" FontAttributes="Bold" Margin="0,0,15,0"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Last Lap:" Font="40" FontAttributes="Bold"/>
+                                    <Label Text="{Binding LastLap}" Font="40" Margin="0,0,15,0"/>
+                                </StackLayout>
+                                <Label Text="{Binding Team}" Font="24" Margin="3"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <Label x:Name="errorLabel"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
