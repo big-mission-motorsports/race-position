@@ -66,6 +66,12 @@ namespace RacePosition
                     {
                         var eventData = eventDataStream.ReadToEnd();
                         var rhevent = Event.FromJson(eventData);
+
+                        if (rhevent.CurrentLap == null || rhevent.CurrentLap == 0)
+                        {
+                            LastError = "Awaiting event to start";
+                        }
+
                         return ProcessData(rhevent);
                     }
                 }
@@ -101,7 +107,6 @@ namespace RacePosition
                 {
                     overallDriverAhead = passingsOverall[overallDriverIndex - 1];
                 }
-
 
                 for (int i = 0; i < passingsInClass.Length; i++)
                 {

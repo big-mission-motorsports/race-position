@@ -57,7 +57,8 @@ namespace RacePosition
 
         private void SetErrorMessage(string error)
         {
-            this.errorLabel.Text = error;
+            var timestamp = DateTime.Now;
+            this.errorLabel.Text = timestamp + " :: " + error;
         }
     }
 }

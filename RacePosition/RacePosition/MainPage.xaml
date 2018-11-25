@@ -7,9 +7,9 @@
     <StackLayout>
         <Label Font="24" Text="Enter Your Car and Event..." HorizontalOptions="Center"/>
         <Label Font="32" Text="Car Number" HorizontalOptions="Center"/>
-        <Entry x:Name="carNumber" Text="7"/>
+        <Entry x:Name="carNumber" Text="777C"/>
         <Label Font="32" Text="Event URL" HorizontalOptions="Center"/>
-        <Entry x:Name="eventUrl" Text="http://racehero.io/events/copa-mercosul-itaipu-itamed-de-kart-2018"/>
+        <Entry x:Name="eventUrl" Text="http://racehero.io/events/live-timing-demo-resets-every-20-minutes"/>
         <Button Text="Connect" Clicked="Connect_Clicked"/>
     </StackLayout>
 
