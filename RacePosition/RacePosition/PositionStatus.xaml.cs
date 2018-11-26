@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -15,8 +16,11 @@ namespace RacePosition
     {
         public string CarNumber { get; set; }
         public string EventUrl { get; set; }
+        private const int INTERVALSEC = 3;
 
         private RaceHeroDataProvider dataProvider;
+        private bool loaded = false;
+
 
         public PositionStatus()
         {
@@ -27,32 +31,37 @@ namespace RacePosition
         {
             base.OnAppearing();
 
-            dataProvider = new RaceHeroDataProvider(CarNumber, EventUrl);
-
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            if (!loaded)
             {
-                if (!dataProvider.IsInialized)
+                dataProvider = new RaceHeroDataProvider(CarNumber, EventUrl);
+                var ts = TimeSpan.FromSeconds(3);
+                Device.StartTimer(ts, () =>
                 {
-                    dataProvider.InitilaizePath();
-                }
-
-                if (dataProvider.IsInialized)
-                {
-                    racerList.BeginRefresh();
-                    try
+                    if (!dataProvider.IsInialized)
                     {
-                        var data = dataProvider.RequestUpdate();
-                        racerList.ItemsSource = data;
+                        dataProvider.InitilaizePath();
                     }
-                    finally
-                    {
-                        racerList.EndRefresh();
-                    }
-                }
 
-                SetErrorMessage(dataProvider.LastError);
-                return true;
-            });
+                    if (dataProvider.IsInialized)
+                    {
+                        racerList.BeginRefresh();
+                        try
+                        {
+                            var data = dataProvider.RequestUpdate();
+                            racerList.ItemsSource = data;
+                        }
+                        finally
+                        {
+                            racerList.EndRefresh();
+                        }
+                    }
+
+                    SetErrorMessage(dataProvider.LastError);
+                    return true;
+                });
+            }
+
+            loaded = true;
         }
 
         private void SetErrorMessage(string error)
