@@ -10,7 +10,7 @@ namespace RacePosition
 {
     class RaceHeroDataProvider
     {
-        const string SITE = "http://racehero.io";
+        public const string SITE = "http://racehero.io";
 
         public string CarNumber { get; set; }
         public string EventUrl { get; set; }
@@ -238,6 +238,58 @@ namespace RacePosition
             }
 
             return path;
+        }
+
+        public static EventMetadataModel[] RequestEvents()
+        {
+            string htmlData = string.Empty;
+            var request = (HttpWebRequest)WebRequest.Create(SITE + "/events");
+            using (var response = request.GetResponse())
+            {
+                using (var eventHtmlStream = new StreamReader(response.GetResponseStream()))
+                {
+                    htmlData = eventHtmlStream.ReadToEnd();
+                    eventHtmlStream.Close();
+                }
+            }
+
+            var evtRegex = new Regex("<a class=\"list-group-item\" href=\"\\/events\\/(?<url>.*)\">(?<c>[\\s\\S]*?)<\\/a>");
+            var evtNameRegex = new Regex("<h4 class=\"list-group-item-heading\">(?<e>[\\s\\S]*?)<");
+
+            var matches = evtRegex.Matches(htmlData);
+
+            var events = new List<EventMetadataModel>();
+            foreach (Match e in matches)
+            {
+                var content = e.Groups["c"].Value;
+                var mn = evtNameRegex.Match(content).Groups["e"].Value.Trim();
+                var url = e.Groups["url"].Value;
+                var isLive = content.Contains("Live Event");
+
+                Console.WriteLine($"{mn} {url} Islive={isLive}");
+                events.Add(new EventMetadataModel { Name = mn, Url = url, IsLive = isLive });
+            }
+
+            return events.ToArray();
+        }
+
+        public static EventMetadataModel FindLiveEvent(EventMetadataModel[] events, string searchTerms)
+        {
+            var liveEvents = events.Where(e => e.IsLive).ToArray();
+            var terms = searchTerms.Split(',');
+            foreach (var term in terms)
+            {
+                foreach (var le in liveEvents)
+                {
+                    var n = le.Name.ToUpper();
+                    if (n.Contains(term.Trim().ToUpper()))
+                    {
+                        return le;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace RacePosition
     {
         public string CarNumber { get; set; }
         public string EventUrl { get; set; }
-        private const int INTERVALSEC = 3;
+        private const int INTERVALSEC = 5;
 
         private RaceHeroDataProvider dataProvider;
         private bool loaded = false;
@@ -34,7 +34,7 @@ namespace RacePosition
             if (!loaded)
             {
                 dataProvider = new RaceHeroDataProvider(CarNumber, EventUrl);
-                var ts = TimeSpan.FromSeconds(3);
+                var ts = TimeSpan.FromSeconds(INTERVALSEC);
                 Device.StartTimer(ts, () =>
                 {
                     if (!dataProvider.IsInialized)

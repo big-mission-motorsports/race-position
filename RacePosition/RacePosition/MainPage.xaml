@@ -2,15 +2,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:RacePosition"
-             x:Class="RacePosition.MainPage">
+             x:Class="RacePosition.MainPage" 
+             Title="Car and Event">
 
     <StackLayout>
-        <Label Font="24" Text="Enter Your Car and Event..." HorizontalOptions="Center"/>
-        <Label Font="32" Text="Car Number" HorizontalOptions="Center"/>
+        <Label Font="24" Text="Car Number" HorizontalOptions="Center"/>
         <Entry x:Name="carNumber" Text="777C"/>
-        <Label Font="32" Text="Event URL" HorizontalOptions="Center"/>
-        <Entry x:Name="eventUrl" Text="http://racehero.io/events/live-timing-demo-resets-every-20-minutes"/>
-        <Button Text="Connect" Clicked="Connect_Clicked"/>
+
+        <Label Font="24" Text="Auto Connect Keywords (comma seperated)" HorizontalOptions="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="eventKeywords" Text="World Racing League, WRL"/>
+            <Button Text="Connect" Clicked="KeywordConnect_Clicked" Grid.Column="1"/>
+        </Grid>
+        
+        <Label Font="18" Text="OR" HorizontalOptions="Center"/>
+
+        <Label Font="24" Text="Available Events" HorizontalOptions="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Picker x:Name="EventPicker"/>
+            <Button Text="Refresh" Clicked="RefreshEvents_Clicked" Grid.Column="1"/>
+            <Button Text="Connect" Clicked="PickerConnect_Clicked" Grid.Column="2"/>
+        </Grid>
+
+        <Label Font="18" Text="OR" HorizontalOptions="Center"/>
+        
+        <Label Font="24" Text="Direct Event URL" HorizontalOptions="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="eventUrl" Text="http://racehero.io/events/live-timing-demo-resets-every-20-minutes"/>
+            <Button Text="Connect" Clicked="UrlConnect_Clicked" Grid.Column="1"/>
+        </Grid>
     </StackLayout>
 
 </ContentPage>
