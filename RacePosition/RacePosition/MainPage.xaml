@@ -15,8 +15,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <ActivityIndicator x:Name="activityIndicator" IsVisible="False" IsRunning="True"/>
             <Entry x:Name="eventKeywords" Text="World Racing League, WRL"/>
-            <Button Text="Connect" Clicked="KeywordConnect_Clicked" Grid.Column="1"/>
+            <Button x:Name="kwConnect" Text="Connect" Clicked="KeywordConnect_Clicked" Grid.Column="1"/>
         </Grid>
         
         <Label Font="18" Text="OR" HorizontalOptions="Center"/>

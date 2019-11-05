@@ -14,6 +14,7 @@ namespace RacePosition
     public partial class MainPage : ContentPage
     {
         private EventMetadataModel[] events;
+        private bool keywordCancel = false;
 
 
         public MainPage()
@@ -26,6 +27,7 @@ namespace RacePosition
         {
             base.OnAppearing();
 
+            ResetKeyword();
             carNumber.Text = Preferences.Get("CarNum", "336");
             eventUrl.Text = Preferences.Get("EvtUrl", "");
             eventKeywords.Text = Preferences.Get("EvtKeywords", "World Racing League, WRL");
@@ -41,27 +43,44 @@ namespace RacePosition
             }
             else
             {
+                if (kwConnect.Text == "Connect")
+                {
+                    kwConnect.Text = "Cancel";
+                }
+                else
+                {
+                    ResetKeyword();
+                    return;
+                }
+
                 Preferences.Set("CarNum", carNumber.Text);
                 Preferences.Set("EvtKeywords", eventKeywords.Text);
+
+                keywordCancel = false;
 
                 var evt = RaceHeroDataProvider.FindLiveEvent(events, eventKeywords.Text);
                 if (evt != null)
                 {
                     var url = CreateUrl(evt.Url);
-                    await Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url });
+                    await Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url, Event = evt.Name });
                 }
                 else
                 {
-                    // **** Add status indicator...
+                    activityIndicator.IsVisible = true;
                     var ts = TimeSpan.FromSeconds(10);
                     Device.StartTimer(ts, () =>
                     {
+                        if (keywordCancel)
+                        {
+                            return false;
+                        }
+
                         RefreshEvents_Clicked(null, null);
                         evt = RaceHeroDataProvider.FindLiveEvent(events, eventKeywords.Text);
                         if (evt != null)
                         {
                             var url = CreateUrl(evt.Url);
-                            Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url });
+                            Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url, Event = evt.Name });
                             return false;
                         }
 
@@ -86,7 +105,7 @@ namespace RacePosition
                     var evt = events.FirstOrDefault(s => s.Name == EventPicker.SelectedItem.ToString());
 
                     var url = CreateUrl(evt.Url);
-                    await Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url });
+                    await Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url, Event = evt.Name });
                 }
 
             }
@@ -123,6 +142,13 @@ namespace RacePosition
         private static string CreateUrl(string evtUrl)
         {
             return RaceHeroDataProvider.SITE + "/events/" + evtUrl;
+        }
+
+        private void ResetKeyword()
+        {
+            keywordCancel = true;
+            kwConnect.Text = "Connect";
+            activityIndicator.IsVisible = false;
         }
     }
 }

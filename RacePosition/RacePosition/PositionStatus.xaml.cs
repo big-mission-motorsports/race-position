@@ -16,6 +16,7 @@ namespace RacePosition
     {
         public string CarNumber { get; set; }
         public string EventUrl { get; set; }
+        public string Event { get; set; }
         private const int INTERVALSEC = 5;
 
         private RaceHeroDataProvider dataProvider;
@@ -33,6 +34,11 @@ namespace RacePosition
 
             if (!loaded)
             {
+                Title = CarNumber;
+                if (!string.IsNullOrWhiteSpace(Event))
+                {
+                    Title += " - " + Event;
+                }
                 dataProvider = new RaceHeroDataProvider(CarNumber, EventUrl);
                 var ts = TimeSpan.FromSeconds(INTERVALSEC);
                 Device.StartTimer(ts, () =>
@@ -55,6 +61,9 @@ namespace RacePosition
                             racerList.EndRefresh();
                         }
                     }
+
+                    posInClassLabel.Text = dataProvider.PositionInClass;
+                    posOverallLabel.Text = dataProvider.PositionOverall;
 
                     SetErrorMessage(dataProvider.LastError);
                     return true;

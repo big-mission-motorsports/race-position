@@ -23,6 +23,10 @@ namespace RacePosition
 
         public string LastError { get; private set; }
 
+        public string PositionInClass { get; private set; }
+        public string PositionOverall { get; private set; }
+
+
         public RaceHeroDataProvider(string carNumber, string eventUrl)
         {
             CarNumber = carNumber;
@@ -71,8 +75,14 @@ namespace RacePosition
                         {
                             LastError = "Awaiting event to start";
                         }
-
-                        return ProcessData(rhevent);
+                        var racerVms = ProcessData(rhevent);
+                        var driverCar = racerVms.FirstOrDefault(c => c.IsDriversCar);
+                        if (driverCar != null)
+                        {
+                            PositionInClass = driverCar.PositionInClass;
+                            PositionOverall = driverCar.PositionOverall;
+                        }
+                        return racerVms;
                     }
                 }
             }
