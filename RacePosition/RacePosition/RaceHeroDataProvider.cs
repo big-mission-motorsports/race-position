@@ -136,9 +136,9 @@ namespace RacePosition
 
                             if (overallDriverAhead != null && overallDriverAhead != inClassAhead)
                             {
-                                var rvm = FindTimeDiff(rhevent, driversCar, overallDriverAhead);
-                                rvm.IsInClass = false;
-                                rvms.Add(rvm);
+                                //var rvm = FindTimeDiff(rhevent, driversCar, overallDriverAhead);
+                                //rvm.IsInClass = false;
+                                //rvms.Add(rvm);
                             }
 
                             var driversVm = new RacerViewModel
