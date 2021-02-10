@@ -4,7 +4,7 @@
              x:Class="RacePosition.PositionStatus">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Label Text="P" Font="52" FontAttributes="Bold"/>
                 <Label x:Name="posInClassLabel" Font="52" FontAttributes="Bold" Margin="0,0,10,0"/>
                 <Label Text="Overall:" Font="42" Margin="0,0,2,0" VerticalTextAlignment="Center"/>
@@ -27,18 +27,18 @@
                                 </Grid.RowDefinitions>
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Team}" Font="40"/>
-                                    <Label Text="#" Font="40"/>
-                                    <Label Text="{Binding CarNumber}" Font="40" FontAttributes="Bold" Margin="0,0,10,0"/>
+                                    <Label Text="{Binding Team}" Font="40" TextColor="{Binding ForegroundColor}"/>
+                                    <Label Text="#" Font="40" TextColor="{Binding ForegroundColor}"/>
+                                    <Label Text="{Binding CarNumber}" Font="40" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Grid.Row="1">
-                                    <Label Text="Last Lap:" Font="36" FontAttributes="Bold"/>
-                                    <Label Text="{Binding LastLap}" Font="36" Margin="0,0,10,0"/>
+                                    <Label Text="Last Lap:" Font="36" FontAttributes="Bold" TextColor="{Binding ForegroundColor}"/>
+                                    <Label Text="{Binding LastLap}" Font="36" TextColor="{Binding ForegroundColor}" Margin="0,0,10,0"/>
                                 </StackLayout>
                                 <Image IsVisible="{Binding IsDriversCar}" Source="silhouette.png" Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" WidthRequest="150" Margin="0,0,15,0"/>
                                 <StackLayout Orientation="Vertical" Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" Margin="0,15,0,0">
-                                    <Label Text="{Binding Gap}" Font="40" Margin="0,0,15,0" HorizontalTextAlignment="Center"/>
-                                    <Label Text="{Binding GainLoss}" Font="34" FontAttributes="Bold" Margin="0,0,10,0" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Gap}" Font="40" TextColor="{Binding ForegroundColor}" Margin="0,0,15,0" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding GainLoss}" Font="34" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0" HorizontalTextAlignment="Center"/>
                                 </StackLayout>
                             </Grid>
                             <!--<StackLayout Orientation="Vertical" BackgroundColor="{Binding Background}">

@@ -26,7 +26,7 @@ namespace RacePosition
             {
                 if (IsDriversCar)
                 {
-                    return Color.Aqua;
+                    return Color.DimGray;
                 }
 
                 if (!IsInClass)
@@ -41,6 +41,21 @@ namespace RacePosition
                 else
                 {
                     return Color.Red;
+                }
+            }
+        }
+
+        public Color ForegroundColor
+        {
+            get
+            {
+                if (GainedTime)
+                {
+                    return Color.Black;
+                }
+                else
+                {
+                    return Color.White;
                 }
             }
         }
