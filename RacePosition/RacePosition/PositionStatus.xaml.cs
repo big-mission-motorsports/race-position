@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace RacePosition
+namespace BigMission.RacePosition
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PositionStatus : ContentPage
@@ -76,7 +69,7 @@ namespace RacePosition
         private void SetErrorMessage(string error)
         {
             var timestamp = DateTime.Now;
-            this.errorLabel.Text = timestamp + " :: " + error;
+            errorLabel.Text = timestamp + " :: " + error;
         }
     }
 }

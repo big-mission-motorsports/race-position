@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 using Xamarin.Essentials;
-using System.Net;
-using System.IO;
-using System.Text.RegularExpressions;
+using Xamarin.Forms;
 
-namespace RacePosition
+namespace BigMission.RacePosition
 {
     public partial class MainPage : ContentPage
     {

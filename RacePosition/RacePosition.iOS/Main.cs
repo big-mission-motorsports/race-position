@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace RacePosition.iOS
+namespace BigMission.RacePosition.iOS
 {
     public class Application
     {
