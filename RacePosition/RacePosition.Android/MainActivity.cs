@@ -2,6 +2,9 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace BigMission.RacePosition.Droid
 {
@@ -17,6 +20,9 @@ namespace BigMission.RacePosition.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             this.Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
             LoadApplication(new App());
+
+            AppCenter.Start("4ac4cd9d-8cbc-42ba-bf8b-f830857bdd0c", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("4ac4cd9d-8cbc-42ba-bf8b-f830857bdd0c", typeof(Analytics), typeof(Crashes));
         }
     }
 }

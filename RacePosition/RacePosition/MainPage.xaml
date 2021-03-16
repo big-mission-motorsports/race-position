@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BigMission.RacePosition"
              x:Class="BigMission.RacePosition.MainPage" 
-             Title="Car and Event">
+             Title="Big Mission Motorsports In-Car Timing: Enter Car and Event">
 
     <StackLayout>
         <Label Font="24" Text="Car Number" HorizontalOptions="Center"/>
@@ -23,7 +23,8 @@
 
         <Label Font="18" Text="OR" HorizontalOptions="Center"/>
 
-        <Label Font="24" Text="Auto Connect with Event Keyword (comma seperated)" HorizontalOptions="Center"/>
+        <Label Font="24" Text="Connect with Event Keyword" HorizontalOptions="Center"/>
+        <Label Font="12" Text="Find an event with a one of the following terms in the title (comma seperated)" HorizontalOptions="Center"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -36,7 +37,7 @@
 
         <Label Font="18" Text="OR" HorizontalOptions="Center"/>
 
-        <Label Font="24" Text="Direct Event URL" HorizontalOptions="Center"/>
+        <Label Font="24" Text="Direct RaceHero Event URL" HorizontalOptions="Center"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
