@@ -64,20 +64,26 @@ namespace BigMission.RacePosition
                     var ts = TimeSpan.FromSeconds(10);
                     Device.StartTimer(ts, () =>
                     {
-                        if (keywordCancel)
+                        try
                         {
-                            return false;
-                        }
+                            if (keywordCancel)
+                            {
+                                return false;
+                            }
 
-                        RefreshEvents_Clicked(null, null);
-                        evt = RaceHeroDataProvider.FindLiveEvent(events, eventKeywords.Text);
-                        if (evt != null)
+                            RefreshEvents_Clicked(null, null);
+                            evt = RaceHeroDataProvider.FindLiveEvent(events, eventKeywords.Text);
+                            if (evt != null)
+                            {
+                                var url = CreateUrl(evt.Url);
+                                Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url, Event = evt.Name });
+                                return false;
+                            }
+                        }
+                        catch
                         {
-                            var url = CreateUrl(evt.Url);
-                            Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url, Event = evt.Name });
-                            return false;
+                            Console.WriteLine("Failed to connect, retrying.");
                         }
-
                         return true;
                     });
                 }
@@ -101,7 +107,6 @@ namespace BigMission.RacePosition
                     var url = CreateUrl(evt.Url);
                     await Navigation.PushAsync(new PositionStatus { CarNumber = carNumber.Text, EventUrl = url, Event = evt.Name });
                 }
-
             }
         }
 
