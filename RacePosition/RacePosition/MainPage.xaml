@@ -30,7 +30,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ActivityIndicator x:Name="activityIndicator" IsVisible="False" IsRunning="True"/>
+            <StackLayout x:Name="activitySl" IsVisible="False">
+                <ActivityIndicator x:Name="activityIndicator"  IsRunning="True"/>
+                <Label x:Name="activityLabel"/>
+            </StackLayout>
             <Entry x:Name="eventKeywords" Text="World Racing League, WRL"/>
             <Button x:Name="kwConnect" Text="Connect" Clicked="KeywordConnect_Clicked" Grid.Column="1"/>
         </Grid>

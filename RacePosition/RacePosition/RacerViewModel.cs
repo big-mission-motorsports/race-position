@@ -6,7 +6,19 @@ namespace BigMission.RacePosition
     {
         public string CarNumber { get; set; }
         public string Class { get; set; }
-        public string Team { get; set; }
+        private string team;
+        public string Team 
+        {
+            get 
+            { 
+                if (!string.IsNullOrEmpty(team) && team.Length > 16)
+                {
+                    return team.Substring(0, 14) + "..";
+                }
+                return team;
+            }
+            set { team = value; }
+        }
         public string PositionInClass { get; set; }
         public string PositionOverall { get; set; }
         public string LastLap { get; set; }

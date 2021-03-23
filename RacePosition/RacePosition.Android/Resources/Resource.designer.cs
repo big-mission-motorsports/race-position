@@ -12000,16 +12000,13 @@ namespace BigMission.RacePosition.Droid
 			public const int notify_panel_notification_icon_bg = 2131165533;
 			
 			// aapt resource value: 0x7F07015E
-			public const int silhouette = 2131165534;
+			public const int test_custom_background = 2131165534;
 			
 			// aapt resource value: 0x7F07015F
-			public const int test_custom_background = 2131165535;
+			public const int tooltip_frame_dark = 2131165535;
 			
 			// aapt resource value: 0x7F070160
-			public const int tooltip_frame_dark = 2131165536;
-			
-			// aapt resource value: 0x7F070161
-			public const int tooltip_frame_light = 2131165537;
+			public const int tooltip_frame_light = 2131165536;
 			
 			static Drawable()
 			{

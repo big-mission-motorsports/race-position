@@ -25,8 +25,6 @@ namespace BigMission.RacePosition
             carNumber.Text = Preferences.Get("CarNum", "336");
             eventUrl.Text = Preferences.Get("EvtUrl", "");
             eventKeywords.Text = Preferences.Get("EvtKeywords", "World Racing League, WRL");
-
-            RefreshEvents_Clicked(null, null);
         }
 
         private async void KeywordConnect_Clicked(object sender, EventArgs e)
@@ -60,12 +58,17 @@ namespace BigMission.RacePosition
                 }
                 else
                 {
-                    activityIndicator.IsVisible = true;
-                    var ts = TimeSpan.FromSeconds(10);
+                    activitySl.IsVisible = true;
+                    var ts = TimeSpan.FromSeconds(5);
                     Device.StartTimer(ts, () =>
                     {
                         try
                         {
+                            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                            {
+                                activityLabel.Text = "Waiting on Internet access";
+                            }
+
                             if (keywordCancel)
                             {
                                 return false;
@@ -82,7 +85,8 @@ namespace BigMission.RacePosition
                         }
                         catch
                         {
-                            Console.WriteLine("Failed to connect, retrying.");
+                            Console.WriteLine("Failed to connect, retrying");
+                            activityLabel.Text = "Failed to connect, retrying";
                         }
                         return true;
                     });
@@ -129,8 +133,15 @@ namespace BigMission.RacePosition
         {
             try
             {
-                events = RaceHeroDataProvider.RequestEvents();
-                EventPicker.ItemsSource = events.Select(s => s.Name).ToArray();
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    events = RaceHeroDataProvider.RequestEvents();
+                    EventPicker.ItemsSource = events.Select(s => s.Name).ToArray();
+                }
+                else
+                {
+                    DisplayAlert("Error", "Internet not available.", "OK").Wait();
+                }
             }
             catch
             {
@@ -147,7 +158,7 @@ namespace BigMission.RacePosition
         {
             keywordCancel = true;
             kwConnect.Text = "Connect";
-            activityIndicator.IsVisible = false;
+            activitySl.IsVisible = false;
         }
     }
 }

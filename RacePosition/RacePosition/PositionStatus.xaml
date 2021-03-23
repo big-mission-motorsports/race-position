@@ -1,7 +1,104 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BigMission.RacePosition"
              x:Class="BigMission.RacePosition.PositionStatus">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="SmallVert">
+            <ViewCell>
+                <Grid BackgroundColor="{Binding Background}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Team}" Font="36" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="#" Font="36" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="{Binding CarNumber}" Font="36" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Label Text="Last Lap:" Font="36" FontAttributes="Bold" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="{Binding LastLap}" Font="36" TextColor="{Binding ForegroundColor}" Margin="0,0,10,0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Row="2" VerticalOptions="Center" Margin="0,15,0,0">
+                        <Label Text="{Binding Gap}" Font="36" TextColor="{Binding ForegroundColor}" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding GainLoss}" Font="36" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SmallHorz">
+            <ViewCell>
+                <Grid BackgroundColor="{Binding Background}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Team}" Font="22" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="#" Font="22" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="{Binding CarNumber}" Font="22" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Label Text="Last Lap:" Font="22" FontAttributes="Bold" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="{Binding LastLap}" Font="22" TextColor="{Binding ForegroundColor}" Margin="0,0,10,0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" Margin="0,15,0,0">
+                        <Label Text="{Binding Gap}" Font="22" TextColor="{Binding ForegroundColor}" Margin="0,0,15,0" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding GainLoss}" Font="22" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Large">
+            <ViewCell>
+                <Grid BackgroundColor="{Binding Background}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Team}" Font="36" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="#" Font="36" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="{Binding CarNumber}" Font="36" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Label Text="Last Lap:" Font="36" FontAttributes="Bold" TextColor="{Binding ForegroundColor}"/>
+                        <Label Text="{Binding LastLap}" Font="36" TextColor="{Binding ForegroundColor}" Margin="0,0,10,0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" Margin="0,15,0,0">
+                        <Label Text="{Binding Gap}" Font="40" TextColor="{Binding ForegroundColor}" Margin="0,0,15,0" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding GainLoss}" Font="34" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+
+        <local:CarRowTemplateSelector x:Key="CarRowTempSel"
+            SmallVertical="{StaticResource SmallVert}"
+            SmallHorz="{StaticResource SmallHorz}"
+            Large="{StaticResource Large}"/>
+
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -11,59 +108,8 @@
                 <Label x:Name="posOverallLabel" Font="42" VerticalTextAlignment="Center"/>
             </StackLayout>
 
-            <ListView x:Name="racerList" RowHeight="115" VerticalOptions="FillAndExpand">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid BackgroundColor="{Binding Background}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Team}" Font="40" TextColor="{Binding ForegroundColor}"/>
-                                    <Label Text="#" Font="40" TextColor="{Binding ForegroundColor}"/>
-                                    <Label Text="{Binding CarNumber}" Font="40" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" Grid.Row="1">
-                                    <Label Text="Last Lap:" Font="36" FontAttributes="Bold" TextColor="{Binding ForegroundColor}"/>
-                                    <Label Text="{Binding LastLap}" Font="36" TextColor="{Binding ForegroundColor}" Margin="0,0,10,0"/>
-                                </StackLayout>
-                                <!--<Image IsVisible="{Binding IsDriversCar}" Source="silhouette.png" Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" WidthRequest="150" Margin="0,0,15,0"/>-->
-                                <StackLayout Orientation="Vertical" Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" Margin="0,15,0,0">
-                                    <Label Text="{Binding Gap}" Font="40" TextColor="{Binding ForegroundColor}" Margin="0,0,15,0" HorizontalTextAlignment="Center"/>
-                                    <Label Text="{Binding GainLoss}" Font="34" TextColor="{Binding ForegroundColor}" FontAttributes="Bold" Margin="0,0,10,0" HorizontalTextAlignment="Center"/>
-                                </StackLayout>
-                            </Grid>
-                            <!--<StackLayout Orientation="Vertical" BackgroundColor="{Binding Background}">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="#" Font="40"/>
-                                    <Label Text="{Binding CarNumber}" Font="40" FontAttributes="Bold" Margin="0,0,10,0"/>
-                                    <Label Text="{Binding Class}" Font="40" Margin="0,0,10,0"/>
-                                    <Label Text="P" Font="40" FontAttributes="Bold"/>
-                                    <Label Text="{Binding PositionInClass}" Font="40" FontAttributes="Bold" Margin="0,0,10,0"/>
-                                    <Label Text="Overall:" FontAttributes="Bold" Font="40" Margin="0,0,2,0"/>
-                                    <Label Text="{Binding PositionOverall}" Font="40" FontAttributes="Bold"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Gap}" Font="40" Margin="0,0,15,0"/>
-                                    <Label Text="{Binding GainLoss}" Font="40" FontAttributes="Bold" Margin="0,0,10,0"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Last Lap:" Font="40" FontAttributes="Bold"/>
-                                    <Label Text="{Binding LastLap}" Font="40" Margin="0,0,10,0"/>
-                                </StackLayout>
-                                <Label Text="{Binding Team}" Font="24" Margin="3"/>
-                            </StackLayout>-->
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ListView x:Name="racerList" RowHeight="115" VerticalOptions="FillAndExpand" ItemTemplate="{StaticResource CarRowTempSel}">
+                
             </ListView>
             
             <Label x:Name="errorLabel"/>
