@@ -5,9 +5,13 @@ You'll be able to see who is in front and behind, their car number, gap, lap tim
 
 This is a great tool to help with strategy--like knowing how hard to push or if you have time to be more conservative and preserve your position.
 
-![alt text](https://github.com/big-mission-motorsports/race-position/blob/main/Screenshot_1616535234.png?raw=true)
-![alt text](https://github.com/big-mission-motorsports/race-position/blob/main/Screenshot_1616535352.png?raw=true)
-![alt text](https://github.com/big-mission-motorsports/race-position/blob/main/Screenshot_1616535361.png?raw=true)
+<table>
+	<tr>
+		<td><img src="https://github.com/big-mission-motorsports/race-position/blob/main/Screenshot_1616535234.png?raw=true" width="200" /></td>
+		<td><img src="https://github.com/big-mission-motorsports/race-position/blob/main/Screenshot_1616535352.png?raw=true" width="200" /></td>
+		<td><img src="https://github.com/big-mission-motorsports/race-position/blob/main/Screenshot_1616535361.png?raw=true" width="200" /></td>
+	</tr>
+</table>
 
 ## Key Features
 
