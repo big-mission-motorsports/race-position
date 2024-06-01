@@ -1,5 +1,5 @@
 # Race Position App
-Check out our free app that allows you to see your position while you're driving.
+App that allows you to see your position while you're driving.
 
 You'll be able to see who is in front and behind, their car number, gap, lap times and more.  Since there are many other things to pay attention to, we added simple color coding to make it easy to tell if you're gaining or losing time each lap.
 
